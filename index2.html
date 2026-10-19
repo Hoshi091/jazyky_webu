@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap – ukážková stránka</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { background: #f7f8fc; }
+    .demo-box {
+      min-height: 72px; padding: 1rem; border: 2px solid #8aa8ff;
+      border-radius: .6rem; background: #eaf0ff; color: #20366f;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; font-weight: 600;
+    }
+    .demo-box.alt { background: #e2f7ef; border-color: #76c9a7; color: #155b43; }
+    .demo-box.warm { background: #fff0dc; border-color: #f1bb74; color: #784b13; }
+    .demo-area {
+      background: #fff; border: 1px dashed #aeb6c5; border-radius: .75rem;
+      padding: 1rem; overflow: hidden;
+    }
+    code { color: #9a2878; }
+    .section-card { border: 0; border-radius: 1rem; box-shadow: 0 .25rem 1rem #1d2d5010; }
+    .section-number { display:inline-flex; align-items:center; justify-content:center; width:2rem; height:2rem; border-radius:50%; background:#e7edff; color:#2548a8; font-weight:700; margin-right:.5rem; }
+    .tall .demo-box { min-height: 150px; }
+    .tiny-label { font-size: .8rem; color: #657086; }
+    .code-inspector { background: #111827; color: #e5e7eb; border-radius: .75rem; padding: 1rem; font: .875rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .code-inspector .tag { color: #93c5fd; }
+    .code-inspector .attr { color: #fcd34d; }
+    .code-inspector .value { color: #86efac; }
+    .code-inspector .comment { color: #9ca3af; }
+    .inspect-target { outline: 3px solid #f59e0b !important; outline-offset: 3px; }
+    .inspectable { cursor: pointer; }
+    .inspectable:focus-visible { outline: 3px solid #f59e0b; outline-offset: 3px; }
+    #liveCodeEditor { min-height: 260px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .875rem; }
+  </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Bootstrap laboratórium</a>
+    <span class="navbar-text text-white-50 d-none d-sm-inline">Ukážky pre začiatočníkov</span>
+  </div>
+</nav>
+
+<header class="container py-5">
+  <span class="badge text-bg-primary mb-3">Bootstrap 5.3</span>
+  <h1 class="display-5 fw-bold">Ako funguje Bootstrap?</h1>
+  <p class="lead col-lg-8">Bootstrap poskytuje hotové CSS triedy, pomocou ktorých rýchlo vytvoríme rozloženie stránky, medzery, farby a responzívny dizajn.</p>
+</header>
+
+<main class="container pb-5">
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4 mb-2"><span class="section-number">1</span>Container: šírka obsahu</h2>
+      <p>Bootstrap používa kontajnery, aby obsah nebol nalepený na okraj okna.</p>
+      <div class="bg-primary-subtle border border-primary rounded p-3 mb-3">
+        <code>.container</code> – centrovaný obsah s maximálnou šírkou podľa veľkosti obrazovky.
+      </div>
+      <div class="bg-success-subtle border border-success rounded p-3">
+        <code>.container-fluid</code> – obsah využije takmer celú dostupnú šírku.
+      </div>
+      <p class="tiny-label mt-2 mb-0">Vyskúšaj zmeniť šírku okna prehliadača.</p>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">2</span>Row a columns: základný grid</h2>
+      <p><code>.row</code> vytvorí riadok a <code>.col</code> rozdelí dostupný priestor medzi stĺpce.</p>
+      <div class="demo-area mb-3">
+        <div class="row">
+          <div class="col"><div class="demo-box">.col</div></div>
+          <div class="col"><div class="demo-box alt">.col</div></div>
+          <div class="col"><div class="demo-box warm">.col</div></div>
+        </div>
+      </div>
+      <p class="mb-2">Stĺpce môžu mať aj určenú šírku. Bootstrap grid má 12 dielov.</p>
+      <div class="demo-area">
+        <div class="row">
+          <div class="col-6"><div class="demo-box">.col-6<br>6 z 12 = polovica</div></div>
+          <div class="col-3"><div class="demo-box alt">.col-3<br>štvrtina</div></div>
+          <div class="col-3"><div class="demo-box warm">.col-3<br>štvrtina</div></div>
+        </div>
+      </div>
+      <p class="tiny-label mt-2 mb-0">Skús napríklad zmeniť <code>col-6</code> na <code>col-8</code>. Súčet 12 dielov vyplní celý riadok.</p>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">3</span>Responzívne stĺpce</h2>
+      <p>Breakpoint určuje, od akej šírky obrazovky sa použije dané rozloženie.</p>
+      <div class="demo-area">
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-3"><div class="demo-box">col-12<br><small>mobil: celý riadok</small></div></div>
+          <div class="col-12 col-md-6 col-lg-3"><div class="demo-box alt">col-md-6<br><small>stredná šírka: polovica</small></div></div>
+          <div class="col-12 col-md-6 col-lg-3"><div class="demo-box warm">col-lg-3<br><small>veľká šírka: štvrtina</small></div></div>
+          <div class="col-12 col-md-6 col-lg-3"><div class="demo-box">ďalší stĺpec</div></div>
+        </div>
+      </div>
+      <ul class="mt-3 mb-0">
+        <li><code>col-12</code> – predvolene celá šírka</li>
+        <li><code>col-md-6</code> – od breakpointu <code>md</code> dva stĺpce na riadok</li>
+        <li><code>col-lg-3</code> – od breakpointu <code>lg</code> štyri stĺpce na riadok</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">4</span>Justify: zarovnanie na hlavnej osi</h2>
+      <p>V riadku s voľným miestom určujeme, ako sa prvky rozložia vodorovne.</p>
+      <div class="mb-3">
+        <label class="form-label fw-semibold" for="justifySelect">Vyber triedu <code>justify-content-*</code></label>
+        <select class="form-select" id="justifySelect">
+          <option value="justify-content-start">start – na začiatok</option>
+          <option value="justify-content-center">center – na stred</option>
+          <option value="justify-content-end">end – na koniec</option>
+          <option value="justify-content-between">between – priestor medzi prvkami</option>
+          <option value="justify-content-around">around – priestor okolo prvkov</option>
+          <option value="justify-content-evenly">evenly – rovnaký priestor</option>
+        </select>
+      </div>
+      <div class="demo-area">
+        <div id="justifyDemo" class="row justify-content-start g-2">
+          <div class="col-auto"><div class="demo-box">Prvý</div></div>
+          <div class="col-auto"><div class="demo-box alt">Druhý</div></div>
+          <div class="col-auto"><div class="demo-box warm">Tretí</div></div>
+        </div>
+      </div>
+      <p class="tiny-label mt-2 mb-0">Zmena selectu upraví triedu priamo v ukážke.</p>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">5</span>Align: zarovnanie na priečnej osi</h2>
+      <p><code>align-items-*</code> určuje, ako sa prvky zarovnajú naprieč riadkom. Vyšší kontajner uľahčí pozorovanie rozdielu.</p>
+      <label class="form-label fw-semibold" for="alignSelect">Vyber triedu <code>align-items-*</code></label>
+      <select class="form-select mb-3" id="alignSelect">
+        <option value="align-items-start">start – hore</option>
+        <option value="align-items-center">center – na stred</option>
+        <option value="align-items-end">end – dole</option>
+        <option value="align-items-stretch">stretch – natiahnuť</option>
+      </select>
+      <div class="demo-area">
+        <div id="alignDemo" class="row tall align-items-start g-2">
+          <div class="col"><div class="demo-box">Krátky</div></div>
+          <div class="col"><div class="demo-box alt" style="min-height:100px">Stredný</div></div>
+          <div class="col"><div class="demo-box warm" style="min-height:125px">Vyšší prvok</div></div>
+        </div>
+      </div>
+      <p class="tiny-label mt-2 mb-0">Poznámka: <code>align-content-*</code> je iné; zarovnáva celé riadky, keď je ich viac.</p>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">6</span>Medzery: gap, g, m a p</h2>
+      <p>Bootstrap má triedy na medzery medzi stĺpcami, ako aj na vonkajšie a vnútorné odsadenie.</p>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="border rounded p-3 h-100">
+            <h3 class="h6">Medzery v gride</h3>
+            <p><code>g-3</code> – medzery vodorovne aj zvislo</p>
+            <p><code>gx-4</code> – len vodorovne</p>
+            <p class="mb-0"><code>gy-2</code> – len zvislo</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="border rounded p-3 h-100">
+            <h3 class="h6">Margin a padding</h3>
+            <p><code>m-3</code> – vonkajšia medzera</p>
+            <p><code>p-3</code> – vnútorné odsadenie</p>
+            <p class="mb-0"><code>mt-2</code>, <code>px-4</code> – konkrétne strany</p>
+          </div>
+        </div>
+      </div>
+      <h3 class="h6 mt-4">Porovnaj p-1 a p-4</h3>
+      <div class="row g-3">
+        <div class="col-md-6"><div class="bg-primary-subtle border border-primary rounded p-1"><div class="bg-white rounded text-center">p-1: malé vnútorné odsadenie</div></div></div>
+        <div class="col-md-6"><div class="bg-primary-subtle border border-primary rounded p-4"><div class="bg-white rounded text-center">p-4: väčšie vnútorné odsadenie</div></div></div>
+      </div>
+      <p class="tiny-label mt-2 mb-0">Veľkosti tried sú založené na Bootstrap spacing scale, nie na ľubovoľnom počte pixelov.</p>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">7</span>Ďalšie užitočné komponenty</h2>
+      <p>Bootstrap obsahuje aj pripravené štýly pre bežné prvky stránky.</p>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h3 class="h5">Karta (card)</h3>
+              <p class="card-text">Obsah môže byť rozdelený do samostatných blokov.</p>
+              <a href="#top" class="btn btn-primary btn-sm">Tlačidlo</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="alert alert-success mb-0 h-100"><strong>Alert</strong><br>Správa pre používateľa, napríklad úspešné uloženie.</div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 bg-dark text-white rounded h-100"><strong>Farby a zaoblenie</strong><br><code class="text-warning">bg-dark</code>, <code class="text-warning">text-white</code>, <code class="text-warning">rounded</code></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section class="card section-card mb-4" id="inspect-elements">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">8</span>Klikni na prvok a pozri si jeho HTML</h2>
+      <p>Vyber niektorý prvok v ukážke. Zvýrazní sa a vedľa uvidíš jeho HTML značku, atribút <code>class</code> a krátke vysvetlenie tried.</p>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="demo-area">
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <div class="card h-100 inspectable" tabindex="0" data-html-tag="div" data-classes="card h-100" data-explain="card vytvorí kartu s okrajom; h-100 ju natiahne na výšku rodiča.">
+                  <div class="card-body inspectable" tabindex="0" data-html-tag="div" data-classes="card-body" data-explain="card-body pridáva štandardné vnútorné odsadenie karty.">
+                    <h3 class="h5 inspectable" tabindex="0" data-html-tag="h3" data-classes="h5" data-explain="h5 nastaví veľkosť písma podľa hierarchie nadpisov Bootstrapu.">Ukážková karta</h3>
+                    <p class="card-text inspectable" tabindex="0" data-html-tag="p" data-classes="card-text" data-explain="card-text je trieda určená pre text v karte.">Toto je text vo vnútri karty.</p>
+                    <button type="button" class="btn btn-primary btn-sm inspectable" data-html-tag="button" data-classes="btn btn-primary btn-sm" data-explain="btn vytvorí základný vzhľad tlačidla; btn-primary pridá primárnu farbu; btn-sm zmenší tlačidlo." tabindex="0">Tlačidlo</button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 inspectable alert alert-success h-100" tabindex="0" data-html-tag="div" data-classes="alert alert-success h-100" data-explain="alert vytvorí zvýraznenú správu; alert-success použije zelený štýl; h-100 vyplní výšku rodiča.">
+                <strong>Úspešná správa</strong>
+                <p class="mb-0">Tento prvok používa triedy pre alert.</p>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2 align-items-center p-3 bg-light rounded inspectable" tabindex="0" data-html-tag="div" data-classes="d-flex flex-wrap gap-2 align-items-center p-3 bg-light rounded" data-explain="d-flex aktivuje flexbox; flex-wrap povoľuje zalamovanie; gap-2 nastaví medzeru; align-items-center zarovná prvky na priečnej osi; p-3 pridá vnútorné odsadenie; bg-light nastaví svetlé pozadie; rounded zaoblí rohy.">
+              <span class="badge text-bg-primary inspectable" tabindex="0" data-html-tag="span" data-classes="badge text-bg-primary" data-explain="badge vytvorí štítok; text-bg-primary nastaví primárnu farbu pozadia a kontrastnú farbu textu.">Bootstrap</span>
+              <span class="badge text-bg-success inspectable" tabindex="0" data-html-tag="span" data-classes="badge text-bg-success" data-explain="badge vytvorí štítok; text-bg-success použije zelenú farebnú kombináciu.">Hotovo</span>
+              <span class="small text-secondary inspectable" tabindex="0" data-html-tag="span" data-classes="small text-secondary" data-explain="small zmenší text; text-secondary nastaví sekundárnu farbu textu.">Pomocný text</span>
+            </div>
+          </div>
+          <p class="tiny-label mt-2 mb-0">Tip: prvky vyberaj myšou alebo klávesom Tab a Enter.</p>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="h6">HTML vybraného prvku</h3>
+          <pre class="code-inspector mb-3" id="selectedElementCode"><span class="comment">&lt;-- Klikni na prvok v ukážke --&gt;</span></pre>
+          <h3 class="h6">Čo znamenajú jeho triedy?</h3>
+          <div class="border rounded p-3" id="selectedClassExplain" aria-live="polite">Vyber prvok vľavo a zobrazí sa vysvetlenie jeho Bootstrap tried.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4" id="edit-code">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">9</span>Uprav HTML a pozri si výsledok</h2>
+      <div class="row g-3">
+        <div class="col-lg-6">
+          <label for="liveCodeEditor" class="form-label fw-semibold">HTML kód</label>
+          <textarea id="liveCodeEditor" class="form-control" spellcheck="false"><div class="row g-3">
+  <div class="col-md-4">
+    <div class="p-3 bg-primary text-white rounded text-center">
+      Prvý stĺpec
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="p-3 bg-success text-white rounded text-center">
+      Druhý stĺpec
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="p-3 bg-warning rounded text-center">
+      Tretí stĺpec
+    </div>
+  </div>
+</div></textarea>
+          <div class="d-flex flex-wrap gap-2 mt-2">
+            <button type="button" class="btn btn-primary" id="runLiveCode">Spustiť ukážku</button>
+            <button type="button" class="btn btn-outline-secondary" id="resetLiveCode">Obnoviť pôvodný kód</button>
+          </div>
+          <p class="tiny-label mt-2 mb-0">Uprav napríklad <code>col-md-4</code>, <code>g-3</code>, <code>bg-primary</code> alebo <code>p-3</code>.</p>
+        </div>
+        <div class="col-lg-6">
+          <h3 class="h6">Výsledok</h3>
+          <div class="demo-area" id="liveCodePreview" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4" id="playground">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">10</span>Bootstrap playground</h2>
+      <p>Experimentuj s triedami a sleduj, ako sa mení výsledok. </p>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="border rounded-3 p-3 h-100 bg-light">
+            <label class="form-label fw-semibold" for="playCols">Počet stĺpcov</label>
+            <select class="form-select mb-3" id="playCols">
+              <option value="2">2 stĺpce</option>
+              <option value="3" selected>3 stĺpce</option>
+              <option value="4">4 stĺpce</option>
+              <option value="6">6 stĺpcov</option>
+            </select>
+
+            <label class="form-label fw-semibold" for="playGap">Medzera medzi stĺpcami (<code>g-*</code>)</label>
+            <select class="form-select mb-3" id="playGap">
+              <option value="0">g-0 – bez medzery</option>
+              <option value="1">g-1 – veľmi malá</option>
+              <option value="2">g-2 – malá</option>
+              <option value="3" selected>g-3 – stredná</option>
+              <option value="4">g-4 – veľká</option>
+              <option value="5">g-5 – veľmi veľká</option>
+            </select>
+
+            <label class="form-label fw-semibold" for="playJustify">Vodorovné rozloženie</label>
+            <select class="form-select mb-3" id="playJustify">
+              <option value="start">justify-content-start</option>
+              <option value="center">justify-content-center</option>
+              <option value="end">justify-content-end</option>
+              <option value="between">justify-content-between</option>
+              <option value="around">justify-content-around</option>
+              <option value="evenly">justify-content-evenly</option>
+            </select>
+
+            <label class="form-label fw-semibold" for="playAlign">Zvislé zarovnanie</label>
+            <select class="form-select mb-3" id="playAlign">
+              <option value="start">align-items-start</option>
+              <option value="center" selected>align-items-center</option>
+              <option value="end">align-items-end</option>
+              <option value="stretch">align-items-stretch</option>
+            </select>
+
+            <label class="form-label fw-semibold" for="playColor">Farba prvkov</label>
+            <select class="form-select mb-3" id="playColor">
+              <option value="primary">Modrá</option>
+              <option value="success">Zelená</option>
+              <option value="warning">Žltá</option>
+              <option value="danger">Červená</option>
+              <option value="dark">Tmavá</option>
+            </select>
+
+            <label class="form-label fw-semibold" for="playPadding">Vnútorné odsadenie (<code>p-*</code>)</label>
+            <select class="form-select mb-3" id="playPadding">
+              <option value="1">p-1 – malé</option>
+              <option value="2">p-2</option>
+              <option value="3" selected>p-3 – stredné</option>
+              <option value="4">p-4 – veľké</option>
+              <option value="5">p-5 – veľmi veľké</option>
+            </select>
+            <div class="d-flex gap-2">
+              <button type="button" class="btn btn-primary flex-grow-1" id="playReset">Obnoviť</button>
+              <button type="button" class="btn btn-outline-secondary" id="playShuffle">Prekvap ma!</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <h3 class="h6">Náhľad</h3>
+          <div class="demo-area mb-3">
+            <div id="playPreview" class="row g-3 align-items-center justify-content-start">
+              <div class="col"><div class="p-3 rounded bg-primary text-white text-center">Prvok 1</div></div>
+              <div class="col"><div class="p-3 rounded bg-primary text-white text-center">Prvok 2</div></div>
+              <div class="col"><div class="p-3 rounded bg-primary text-white text-center">Prvok 3</div></div>
+            </div>
+          </div>
+          <div class="border rounded-3 p-3">
+            <div class="d-flex align-items-center justify-content-between gap-2 mb-2">
+              <h3 class="h6 mb-0">Použité triedy</h3>
+              <button type="button" class="btn btn-sm btn-outline-primary" id="copyClasses">Kopírovať triedy</button>
+            </div>
+            <code id="playClassOutput" class="d-block text-break">row g-3 align-items-center justify-content-start</code>
+            <p class="tiny-label mt-2 mb-0" id="copyFeedback">Tieto triedy by si pridal/a do atribútu <code>class</code> v HTML.</p>
+          </div>
+          <div class="alert alert-warning mt-3 mb-0">
+            <strong>Výzva:</strong> Nastav 4 stĺpce, <code>g-4</code>, zelenú farbu a zarovnanie na stred. Potom skús dosiahnuť rovnaký výsledok úpravou HTML tried.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="card section-card mb-4" id="quiz">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">11</span>Rýchly kvíz</h2>
+      <p>Skús odpovedať bez pomoci. Stránka ti hneď ukáže výsledok.</p>
+      <form id="quizForm">
+        <fieldset class="mb-3">
+          <legend class="h6">1. Ktorá trieda vytvorí riadok v gride?</legend>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1a" value="a"><label class="form-check-label" for="q1a"><code>.col</code></label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1b" value="b"><label class="form-check-label" for="q1b"><code>.row</code></label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q1" id="q1c" value="c"><label class="form-check-label" for="q1c"><code>.container-fluid</code></label></div>
+        </fieldset>
+        <fieldset class="mb-3">
+          <legend class="h6">2. Čo robí <code>p-3</code>?</legend>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2a" value="a"><label class="form-check-label" for="q2a">Pridá vnútorné odsadenie</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2b" value="b"><label class="form-check-label" for="q2b">Zmení text na tučný</label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q2" id="q2c" value="c"><label class="form-check-label" for="q2c">Zarovná prvky na koniec</label></div>
+        </fieldset>
+        <fieldset class="mb-3">
+          <legend class="h6">3. Ktorá trieda zarovná prvky vodorovne na stred?</legend>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3a" value="a"><label class="form-check-label" for="q3a"><code>align-items-center</code></label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3b" value="b"><label class="form-check-label" for="q3b"><code>justify-content-center</code></label></div>
+          <div class="form-check"><input class="form-check-input" type="radio" name="q3" id="q3c" value="c"><label class="form-check-label" for="q3c"><code>g-3</code></label></div>
+        </fieldset>
+        <button type="submit" class="btn btn-success">Vyhodnotiť kvíz</button>
+        <button type="reset" class="btn btn-outline-secondary ms-1">Vymazať odpovede</button>
+      </form>
+      <div id="quizResult" class="mt-3" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="card section-card">
+    <div class="card-body p-4">
+      <h2 class="h4"><span class="section-number">12</span>Mini úlohy</h2>
+      <ol class="mb-0">
+        <li>Vytvor riadok so štyrmi rovnako širokými stĺpcami.</li>
+        <li>Na mobile zobraz stĺpce pod sebou, na väčšej obrazovke vedľa seba.</li>
+        <li>Zmeň <code>justify-content-start</code> na <code>justify-content-between</code>.</li>
+        <li>Pridaj väčšie medzery medzi stĺpce pomocou <code>g-4</code>.</li>
+        <li>Vytvor kartu s nadpisom, textom a tlačidlom.</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer class="text-center text-secondary small py-4">
+     Bootstrap 5.3 · Oficiálna dokumentácia:
+    <a href="https://getbootstrap.com/docs/5.3/" target="_blank" rel="noreferrer">getbootstrap.com/docs/5.3</a>
+  </footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const justifySelect = document.getElementById('justifySelect');
+  const justifyDemo = document.getElementById('justifyDemo');
+  justifySelect.addEventListener('change', () => {
+    justifyDemo.className = 'row g-2 ' + justifySelect.value;
+  });
+
+  const alignSelect = document.getElementById('alignSelect');
+  const alignDemo = document.getElementById('alignDemo');
+  alignSelect.addEventListener('change', () => {
+    alignDemo.className = 'row tall g-2 ' + alignSelect.value;
+  });
+
+
+  // Playground: pri zmene nastavení prekreslíme ukážku.
+  const playIds = ['playCols', 'playGap', 'playJustify', 'playAlign', 'playColor', 'playPadding'];
+  const playPreview = document.getElementById('playPreview');
+  const playClassOutput = document.getElementById('playClassOutput');
+
+  function updatePlayground() {
+    const count = Number(document.getElementById('playCols').value);
+    const gap = document.getElementById('playGap').value;
+    const justify = document.getElementById('playJustify').value;
+    const align = document.getElementById('playAlign').value;
+    const color = document.getElementById('playColor').value;
+    const padding = document.getElementById('playPadding').value;
+
+    playPreview.className = `row g-${gap} align-items-${align} justify-content-${justify}`;
+    playPreview.innerHTML = '';
+    for (let i = 1; i <= count; i++) {
+      const col = document.createElement('div');
+      col.className = 'col';
+      const item = document.createElement('div');
+      item.className = `p-${padding} rounded bg-${color} ${color === 'warning' ? 'text-dark' : 'text-white'} text-center`;
+      item.textContent = `Prvok ${i}`;
+      col.appendChild(item);
+      playPreview.appendChild(col);
+    }
+    playClassOutput.textContent = `row g-${gap} align-items-${align} justify-content-${justify} | col | p-${padding} rounded bg-${color} text-${color === 'warning' ? 'dark' : 'white'} text-center`;
+  }
+
+  playIds.forEach(id => document.getElementById(id).addEventListener('change', updatePlayground));
+
+  document.getElementById('playReset').addEventListener('click', () => {
+    document.getElementById('playCols').value = '3';
+    document.getElementById('playGap').value = '3';
+    document.getElementById('playJustify').value = 'start';
+    document.getElementById('playAlign').value = 'center';
+    document.getElementById('playColor').value = 'primary';
+    document.getElementById('playPadding').value = '3';
+    updatePlayground();
+  });
+
+  document.getElementById('playShuffle').addEventListener('click', () => {
+    const choices = {
+      playCols: ['2', '3', '4', '6'],
+      playGap: ['0', '1', '2', '3', '4', '5'],
+      playJustify: ['start', 'center', 'end', 'between', 'around', 'evenly'],
+      playAlign: ['start', 'center', 'end', 'stretch'],
+      playColor: ['primary', 'success', 'warning', 'danger', 'dark'],
+      playPadding: ['1', '2', '3', '4', '5']
+    };
+    choices && Object.entries(choices).forEach(([id, values]) => {
+      document.getElementById(id).value = values[Math.floor(Math.random() * values.length)];
+    });
+    updatePlayground();
+  });
+
+  document.getElementById('copyClasses').addEventListener('click', async () => {
+    const feedback = document.getElementById('copyFeedback');
+    try {
+      await navigator.clipboard.writeText(playClassOutput.textContent);
+      feedback.textContent = 'Triedy skopírované. Vlož ich do atribútu class v HTML.';
+    } catch (error) {
+      feedback.textContent = 'Kopírovanie nie je v tomto prehliadači dostupné. Označ triedy a skopíruj ich ručne.';
+    }
+  });
+
+  // Mini kvíz.
+  document.getElementById('quizForm').addEventListener('submit', event => {
+    event.preventDefault();
+    const answers = { q1: 'b', q2: 'a', q3: 'b' };
+    let score = 0;
+    Object.entries(answers).forEach(([question, answer]) => {
+      const chosen = document.querySelector(`input[name="${question}"]:checked`);
+      if (chosen && chosen.value === answer) score++;
+    });
+    const result = document.getElementById('quizResult');
+    const message = score === 3 ? 'Výborne! Všetky odpovede sú správne.' :
+      score === 0 ? 'Skús si ešte raz pozrieť ukážky vyššie.' : 'Máš ' + score + ' z 3 správne. Pozri sa na vysvetlenia a skús to znova.';
+    result.className = 'alert ' + (score === 3 ? 'alert-success' : 'alert-info') + ' mt-3';
+    result.textContent = message;
+  });
+  document.getElementById('quizForm').addEventListener('reset', () => {
+    document.getElementById('quizResult').textContent = '';
+    document.getElementById('quizResult').className = 'mt-3';
+  });
+
+
+  // Klikateľný HTML inspector: ukáže tag, class a vysvetlenie.
+  const selectedElementCode = document.getElementById('selectedElementCode');
+  const selectedClassExplain = document.getElementById('selectedClassExplain');
+  let lastInspected = null;
+
+  function inspectElement(element) {
+    if (lastInspected) lastInspected.classList.remove('inspect-target');
+    lastInspected = element;
+    element.classList.add('inspect-target');
+
+    const tag = (element.dataset.htmlTag || element.tagName.toLowerCase()).toLowerCase();
+    const classes = element.dataset.classes || element.className || '';
+    const safeTag = tag.replace(/[^a-z0-9-]/g, '');
+    selectedElementCode.textContent = `<${safeTag} class="${classes}">\\n  ...\\n</${safeTag}>`;
+    selectedClassExplain.textContent = element.dataset.explain || 'Tento prvok používa kombináciu Bootstrap tried. Skús ich postupne odoberať alebo meniť v HTML.';
+  }
+
+  document.querySelectorAll('#inspect-elements .inspectable').forEach(element => {
+    element.addEventListener('click', event => {
+      event.stopPropagation();
+      inspectElement(element);
+    });
+    element.addEventListener('keydown', event => {
+      if ((event.key === 'Enter' || event.key === ' ') && element.tagName.toLowerCase() !== 'button') {
+        event.preventDefault();
+        inspectElement(element);
+      }
+    });
+  });
+
+  // Malý lokálny HTML editor. Iframe drží ukážku oddelene od hlavnej stránky.
+  const starterCode = document.getElementById('liveCodeEditor').value;
+  const liveCodePreview = document.getElementById('liveCodePreview');
+  const liveCodeEditor = document.getElementById('liveCodeEditor');
+
+  function runLiveCode() {
+    // Iframe izoluje CSS ukážky; Bootstrap stylesheet sa pridá aj do náhľadu.
+    const frame = document.createElement('iframe');
+    frame.title = 'Náhľad upraveného HTML';
+    frame.setAttribute('sandbox', 'allow-same-origin');
+    frame.style.width = '100%';
+    frame.style.minHeight = '220px';
+    frame.style.border = '0';
+    frame.style.background = '#fff';
+    liveCodePreview.replaceChildren(frame);
+    frame.srcdoc = '<!doctype html><html lang="sk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><style>body{padding:1rem;background:white}.row{min-height:60px}</style></head><body>' + liveCodeEditor.value + '<' + '/body><' + '/html>';
+  }
+
+  document.getElementById('runLiveCode').addEventListener('click', runLiveCode);
+  document.getElementById('resetLiveCode').addEventListener('click', () => {
+    liveCodeEditor.value = starterCode;
+    runLiveCode();
+  });
+  runLiveCode();
+
+</script>
+</body>
+</html>
